@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Supermarket.Domain.Entities.Base;
+using System;
 
-namespace Supermarket.Domain.Models
+namespace Supermarket.Entities.Models
 {
-    public class CartItem
+    public class CartItem : BaseEntity
     {
         public Guid ProductId { get; set; }
 

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Supermarket.Domain.Entities.Base;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Supermarket.Domain.Models
+namespace Supermarket.Entities.Models
 {
-    public class Cart
+    public class Cart : BaseEntity
     {
         public DateTime PurchaseDate { get; set; }
 
