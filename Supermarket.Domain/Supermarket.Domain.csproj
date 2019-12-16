@@ -10,4 +10,8 @@
     <None Remove="Enums\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
 </Project>
