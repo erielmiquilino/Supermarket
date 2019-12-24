@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Supermarket.Data.MappingConfiguration;
 using Supermarket.Entities.Models;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,12 @@ namespace Supermarket.Data.Context
 
         public DbSet<CartItem> CartItems { get; set; }
 
-        public MyContext(DbContextOptions<MyContext> options) : base (options)
-        {
+        public MyContext(DbContextOptions<MyContext> options) : base (options) { }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Product>(new ProductConfiguration().Configure);
         }
     }
 }
