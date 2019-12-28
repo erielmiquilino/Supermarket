@@ -11,10 +11,6 @@ namespace Supermarket.Data.Context
     {
         public DbSet<Product> Products { get; set; }
 
-        public DbSet<Cart> Carts { get; set; }
-
-        public DbSet<CartItem> CartItems { get; set; }
-
         public MyContext(DbContextOptions<MyContext> options) : base (options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
