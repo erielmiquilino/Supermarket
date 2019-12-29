@@ -12,16 +12,22 @@ namespace Supermarket.Application.Api.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
+        private IProductService _service;
+        public ProductsController(IProductService service)
+        {
+            _service = service;
+        }
+
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts([FromServices] IProductService service)
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                return Ok(await service.GetAll());
+                return Ok(await _service.GetAll());
             }
             catch (ArgumentException ex)
             {
@@ -29,83 +35,86 @@ namespace Supermarket.Application.Api.Controllers
             }
         }
 
-        //// GET: api/Products/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Product>> GetProduct(Guid id)
-        //{
-        //    var product = await _context.Products.FindAsync(id);
+        // GET: api/Products/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Product>> GetProduct(Guid id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-        //    if (product == null)
-        //    {
-        //        return NotFound();
-        //    }
+            try
+            {
+                return Ok(await _service.Get(id));
+            }
+            catch (ArgumentException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+        }
 
-        //    return product;
-        //}
+        // PUT: api/Products/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutProduct([FromBody] Product product)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-        //// PUT: api/Products/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        //// more details see https://aka.ms/RazorPagesCRUD.
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutProduct(Guid id, Product product)
-        //{
-        //    if (id != product.Id)
-        //    {
-        //        return BadRequest();
-        //    }
+            try
+            {
+                var result = await _service.Put(product);
 
-        //    _context.Entry(product).State = EntityState.Modified;
+                if (result != null)
+                    return Ok(result);
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!ProductExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+                return BadRequest();
+            }
+            catch (ArgumentException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+        }
 
-        //    return NoContent();
-        //}
+        // POST: api/Products
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPost]
+        public async Task<ActionResult<Product>> PostProduct([FromBody] Product product)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-        //// POST: api/Products
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        //// more details see https://aka.ms/RazorPagesCRUD.
-        //[HttpPost]
-        //public async Task<ActionResult<Product>> PostProduct(Product product)
-        //{
-        //    _context.Products.Add(product);
-        //    await _context.SaveChangesAsync();
+            try
+            {
+                var result = await _service.Post(product);
 
-        //    return CreatedAtAction("GetProduct", new { id = product.Id }, product);
-        //}
+                if (result !=  null)
+                    return CreatedAtAction("GetProduct", new { id = product.Id }, product);
 
-        //// DELETE: api/Products/5
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult<Product>> DeleteProduct(Guid id)
-        //{
-        //    var product = await _context.Products.FindAsync(id);
-        //    if (product == null)
-        //    {
-        //        return NotFound();
-        //    }
+                return BadRequest();
+            }
+            catch (ArgumentException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+        }
 
-        //    _context.Products.Remove(product);
-        //    await _context.SaveChangesAsync();
+        // DELETE: api/Products/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Product>> DeleteProduct(Guid id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-        //    return product;
-        //}
-
-        //private bool ProductExists(Guid id)
-        //{
-        //    return _context.Products.Any(e => e.Id == id);
-        //}
+            try
+            {
+                return Ok(await _service.Delete(id));
+            }
+            catch (ArgumentException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+        }
     }
 }
