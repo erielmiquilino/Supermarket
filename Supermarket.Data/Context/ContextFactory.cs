@@ -7,7 +7,7 @@ namespace Supermarket.Data.Context
     {
         public MyContext CreateDbContext(string[] args)
         {
-            var connectionString = "Server=localhsot;Port=3306;Database=supermarket;Uid=root;Pwd=P@ssw0rd";
+            var connectionString = "Server=localhost;Port=3306;Database=supermarket;Uid=root;Pwd=P@ssw0rd";
             var optionBuilder = new DbContextOptionsBuilder<MyContext>();
             optionBuilder.UseMySql(connectionString);
             return new MyContext(optionBuilder.Options);
