@@ -4,4 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Supermarket.Data\Supermarket.Data.csproj" />
+    <ProjectReference Include="..\Supermarket.Domain\Supermarket.Domain.csproj" />
+    <ProjectReference Include="..\Supermarket.Servic\Supermarket.Service.csproj" />
+  </ItemGroup>
+
 </Project>
