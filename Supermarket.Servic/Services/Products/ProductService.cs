@@ -3,7 +3,6 @@ using Supermarket.Domain.Interfaces.Services.Products;
 using Supermarket.Entities.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Supermarket.Service.Services.Products

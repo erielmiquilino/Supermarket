@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Supermarket.Data.MappingConfiguration;
+using Supermarket.Domain.Entities;
 using Supermarket.Entities.Models;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace Supermarket.Data.Context
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Product>(new ProductConfiguration().Configure);
+            modelBuilder.Entity<User>(new UserConfiguration().Configure);
         }
     }
 }
