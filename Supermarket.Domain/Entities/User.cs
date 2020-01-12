@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Supermarket.Domain.Entities
 {
-    public class User : BaseEntity
+    public class UserDto : BaseEntity
     {
         public String Name { get; set; }
 

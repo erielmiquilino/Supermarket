@@ -8,13 +8,13 @@ namespace Supermarket.Domain.Interfaces.Services.Users
 {
     public interface IUserService
     {
-        Task<User> Get(Guid id);
+        Task<UserDto> Get(Guid id);
 
-        Task<IEnumerable<User>> GetAll();
+        Task<IEnumerable<UserDto>> GetAll();
 
-        Task<User> Post(User user);
+        Task<UserDto> Post(UserDto user);
 
-        Task<User> Put(User user);
+        Task<UserDto> Put(UserDto user);
 
         Task<bool> Delete(Guid id);
     }

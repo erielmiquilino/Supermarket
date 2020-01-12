@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Supermarket.Domain.Interfaces.Repositories
 {
-    public interface IUserRepository : IRepository<User>
+    public interface IUserRepository : IRepository<UserDto>
     {
-        Task<User> FindByLogin(String email);
+        Task<UserDto> FindByLogin(String email);
     }
 }

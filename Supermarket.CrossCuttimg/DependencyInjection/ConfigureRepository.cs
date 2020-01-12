@@ -2,7 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using Supermarket.Data.Context;
 using Supermarket.Data.Repository;
+using Supermarket.Data.Implementations;
 using Supermarket.Domain.Interfaces;
+using Supermarket.Domain.Interfaces.Repositories;
 
 namespace Supermarket.CrossCutting.DependencyInjection
 {
@@ -15,6 +17,7 @@ namespace Supermarket.CrossCutting.DependencyInjection
             );
 
             serviceDescriptors.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+            serviceDescriptors.AddScoped<IUserRepository, UserRepository>();
         }
     }
 }

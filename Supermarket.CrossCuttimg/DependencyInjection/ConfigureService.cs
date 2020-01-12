@@ -3,9 +3,6 @@ using Supermarket.Domain.Interfaces.Services.Products;
 using Supermarket.Domain.Interfaces.Services.Users;
 using Supermarket.Service.Services.Products;
 using Supermarket.Service.Services.Users;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Supermarket.CrossCutting.DependencyInjection
 {
@@ -15,6 +12,7 @@ namespace Supermarket.CrossCutting.DependencyInjection
         {
             serviceDescriptors.AddTransient<IProductService, ProductService>();
             serviceDescriptors.AddTransient<IUserService, UserService>();
+            serviceDescriptors.AddTransient<ILoginService, LoginService>();
         }
     }
 }

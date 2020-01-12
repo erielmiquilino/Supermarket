@@ -9,9 +9,9 @@ namespace Supermarket.Service.Services.Users
 {
     public class UserService : IUserService
     {
-        private IRepository<User> _repository;
+        private IRepository<UserDto> _repository;
 
-        public UserService(IRepository<User> repository)
+        public UserService(IRepository<UserDto> repository)
         {
             _repository = repository;
         }
@@ -21,22 +21,22 @@ namespace Supermarket.Service.Services.Users
             return await _repository.DeleteAsync(id);
         }
 
-        public async Task<User> Get(Guid id)
+        public async Task<UserDto> Get(Guid id)
         {
             return await _repository.SelectAsync(id);
         }
 
-        public async Task<IEnumerable<User>> GetAll()
+        public async Task<IEnumerable<UserDto>> GetAll()
         {
             return await _repository.SelectAsync();
         }
 
-        public async Task<User> Post(User user)
+        public async Task<UserDto> Post(UserDto user)
         {
             return await _repository.InsertAsysnc(user);
         }
 
-        public async Task<User> Put(User user)
+        public async Task<UserDto> Put(UserDto user)
         {
             return await _repository.UpdateAsync(user);
         }

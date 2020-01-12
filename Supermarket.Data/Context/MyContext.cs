@@ -18,7 +18,7 @@ namespace Supermarket.Data.Context
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Product>(new ProductConfiguration().Configure);
-            modelBuilder.Entity<User>(new UserConfiguration().Configure);
+            modelBuilder.Entity<UserDto>(new UserConfiguration().Configure);
         }
     }
 }

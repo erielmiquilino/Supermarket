@@ -3,23 +3,20 @@ using Supermarket.Data.Context;
 using Supermarket.Data.Repository;
 using Supermarket.Domain.Entities;
 using Supermarket.Domain.Interfaces.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Supermarket.Data.Implementations
 {
-    class UserRepository : BaseRepository<User>, IUserRepository
+    public class UserRepository : BaseRepository<UserDto>, IUserRepository
     {
-        private DbSet<User> _database;
+        private DbSet<UserDto> _database;
 
         public UserRepository(MyContext context) : base(context)
         {
-            _database = context.Set<User>();
+            _database = context.Set<UserDto>();
         }
 
-        public async Task<User> FindByLogin(string email)
+        public async Task<UserDto> FindByLogin(string email)
         {
             return await _database.FirstOrDefaultAsync(user => user.Email.Equals(email));
         }

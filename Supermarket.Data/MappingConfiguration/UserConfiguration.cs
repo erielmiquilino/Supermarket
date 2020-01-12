@@ -7,9 +7,9 @@ using System.Text;
 
 namespace Supermarket.Data.MappingConfiguration
 {
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+    public class UserConfiguration : IEntityTypeConfiguration<UserDto>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<UserDto> builder)
         {
             builder.ToTable("User");
 
