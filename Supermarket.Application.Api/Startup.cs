@@ -1,11 +1,16 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Supermarket.Application.Api.Config.Swagger;
 using Supermarket.CrossCutting.DependencyInjection;
+using Supermarket.Domain.Security;
+using System;
 
 namespace Supermarket.Application.Api
 {
@@ -24,6 +29,37 @@ namespace Supermarket.Application.Api
             ConfigureSwagger.ConfigureDependenciesService(services);
             ConfigureService.ConfigureDependenciesService(services);
             ConfigureRepository.ConfigureDependenciesService(services);
+
+            var signingConfiguration = new SigningConfiguration();
+            services.AddSingleton(signingConfiguration);
+
+            var tokenConfiguration = new TokenConfiguration();
+            new ConfigureFromConfigurationOptions<TokenConfiguration>(
+                Configuration.GetSection("TokenConfiguration"))
+                .Configure(tokenConfiguration);
+            services.AddSingleton(tokenConfiguration);
+
+            services.AddAuthentication(authOptions =>
+            {
+                authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(bearerOptions => {
+                var paramsValidation = bearerOptions.TokenValidationParameters;
+                paramsValidation.IssuerSigningKey = signingConfiguration.SecurityKey;
+                paramsValidation.ValidAudience = tokenConfiguration.Audience;
+                paramsValidation.ValidIssuer = tokenConfiguration.Issuer;
+                paramsValidation.ValidateIssuerSigningKey = true;
+                paramsValidation.ValidateLifetime = true;
+                paramsValidation.ClockSkew = TimeSpan.Zero;
+            });
+
+            services.AddAuthorization(auth => 
+            {
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser()
+                    .Build());
+            });
 
             services.AddControllers();
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Supermarket.Domain.Entities;
 using Supermarket.Domain.Interfaces.Services.Users;
@@ -20,8 +21,9 @@ namespace Supermarket.Application.Api.Controllers
         }
 
         // GET: api/Users
+        [Authorize("Bearer")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -37,8 +39,9 @@ namespace Supermarket.Application.Api.Controllers
         }
 
         // GET: api/Users/5
+        [Authorize("Bearer")]
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserDto>> GetUser(Guid id)
+        public async Task<ActionResult<User>> GetUser(Guid id)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -56,8 +59,9 @@ namespace Supermarket.Application.Api.Controllers
         // PUT: api/Users/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
+        [Authorize("Bearer")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser([FromBody] UserDto user)
+        public async Task<IActionResult> PutUser([FromBody] User user)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -80,8 +84,9 @@ namespace Supermarket.Application.Api.Controllers
         // POST: api/Users
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
+        [Authorize("Bearer")]
         [HttpPost]
-        public async Task<ActionResult<UserDto>> PostUser([FromBody] UserDto user)
+        public async Task<ActionResult<User>> PostUser([FromBody] User user)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -102,8 +107,9 @@ namespace Supermarket.Application.Api.Controllers
         }
 
         // DELETE: api/Users/5
+        [Authorize("Bearer")]
         [HttpDelete("{id}")]
-        public async Task<ActionResult<UserDto>> DeleteUser(Guid id)
+        public async Task<ActionResult<User>> DeleteUser(Guid id)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

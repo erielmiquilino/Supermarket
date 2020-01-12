@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Supermarket.Domain.Interfaces.Services.Products;
 using Supermarket.Entities.Models;
 using System;
@@ -19,6 +20,7 @@ namespace Supermarket.Application.Api.Controllers
         }
 
         // GET: api/Products
+        [Authorize("Bearer")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
@@ -36,6 +38,7 @@ namespace Supermarket.Application.Api.Controllers
         }
 
         // GET: api/Products/5
+        [Authorize("Bearer")]
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(Guid id)
         {
@@ -55,6 +58,7 @@ namespace Supermarket.Application.Api.Controllers
         // PUT: api/Products/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
+        [Authorize("Bearer")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProduct([FromBody] Product product)
         {
@@ -79,6 +83,7 @@ namespace Supermarket.Application.Api.Controllers
         // POST: api/Products
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
+        [Authorize("Bearer")]
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct([FromBody] Product product)
         {
@@ -101,6 +106,7 @@ namespace Supermarket.Application.Api.Controllers
         }
 
         // DELETE: api/Products/5
+        [Authorize("Bearer")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Product>> DeleteProduct(Guid id)
         {

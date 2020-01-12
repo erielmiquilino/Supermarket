@@ -1,20 +1,19 @@
 ﻿using Supermarket.Domain.Entities;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Supermarket.Domain.Interfaces.Services.Users
 {
     public interface IUserService
     {
-        Task<UserDto> Get(Guid id);
+        Task<User> Get(Guid id);
 
-        Task<IEnumerable<UserDto>> GetAll();
+        Task<IEnumerable<User>> GetAll();
 
-        Task<UserDto> Post(UserDto user);
+        Task<User> Post(User user);
 
-        Task<UserDto> Put(UserDto user);
+        Task<User> Put(User user);
 
         Task<bool> Delete(Guid id);
     }

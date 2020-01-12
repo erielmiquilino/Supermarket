@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Supermarket.Domain.Dtos;
 using Supermarket.Domain.Entities;
 using Supermarket.Domain.Interfaces.Services.Users;
 using System;
@@ -20,19 +22,16 @@ namespace Supermarket.Application.Api.Controllers
 
 
         // POST: api/Login
+        [AllowAnonymous]
         [HttpPost]
-        public async Task<Object> Login([FromBody] UserDto user)
+        public async Task<Object> Login([FromBody] LoginDto login)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                var result = await _service.FindByLogin(user);
-                if (result != null)
-                    return Ok(result);
-                else
-                    return NotFound();
+                return Ok(await _service.FindByLogin(login));
             }
             catch (ArgumentException ex)
             {

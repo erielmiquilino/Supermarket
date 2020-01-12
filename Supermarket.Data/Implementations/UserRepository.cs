@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace Supermarket.Data.Implementations
 {
-    public class UserRepository : BaseRepository<UserDto>, IUserRepository
+    public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        private DbSet<UserDto> _database;
+        private DbSet<User> _database;
 
         public UserRepository(MyContext context) : base(context)
         {
-            _database = context.Set<UserDto>();
+            _database = context.Set<User>();
         }
 
-        public async Task<UserDto> FindByLogin(string email)
+        public async Task<User> FindByLogin(string email)
         {
             return await _database.FirstOrDefaultAsync(user => user.Email.Equals(email));
         }

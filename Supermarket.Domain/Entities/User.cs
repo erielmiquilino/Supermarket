@@ -1,11 +1,9 @@
 ﻿using Supermarket.Domain.Entities.Base;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Supermarket.Domain.Entities
 {
-    public class UserDto : BaseEntity
+    public class User : BaseEntity
     {
         public String Name { get; set; }
 
