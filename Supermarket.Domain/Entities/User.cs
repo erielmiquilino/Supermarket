@@ -11,4 +11,5 @@ namespace Supermarket.Domain.Entities
 
         public String Password { get; set; }
     }
+
 }

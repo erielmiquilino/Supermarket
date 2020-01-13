@@ -1,6 +1,9 @@
-﻿using Supermarket.Domain.Entities;
+﻿using AutoMapper;
+using Supermarket.Domain.Dtos.Users;
+using Supermarket.Domain.Entities;
 using Supermarket.Domain.Interfaces;
 using Supermarket.Domain.Interfaces.Services.Users;
+using Supermarket.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,9 +14,12 @@ namespace Supermarket.Service.Services.Users
     {
         private IRepository<User> _repository;
 
-        public UserService(IRepository<User> repository)
+        private readonly IMapper _mapper;
+
+        public UserService(IRepository<User> repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         public async Task<bool> Delete(Guid id)
@@ -21,24 +27,38 @@ namespace Supermarket.Service.Services.Users
             return await _repository.DeleteAsync(id);
         }
 
-        public async Task<User> Get(Guid id)
+        public async Task<UserDto> Get(Guid id)
         {
-            return await _repository.SelectAsync(id);
+            var entity = await _repository.SelectAsync(id);
+
+            return _mapper.Map<UserDto>(entity);
         }
 
-        public async Task<IEnumerable<User>> GetAll()
+        public async Task<IEnumerable<UserDto>> GetAll()
         {
-            return await _repository.SelectAsync();
+            var listEntity = await _repository.SelectAsync();
+
+            return _mapper.Map<IEnumerable<UserDto>>(listEntity);
         }
 
-        public async Task<User> Post(User user)
+        public async Task<UserDtoCreateResult> Post(UserDtoCreate user)
         {
-            return await _repository.InsertAsysnc(user);
+            var userModel = _mapper.Map<UserModel>(user);
+            var entity = _mapper.Map<User>(userModel);
+
+            var result = await _repository.InsertAsysnc(entity);
+
+            return _mapper.Map<UserDtoCreateResult>(result);
         }
 
-        public async Task<User> Put(User user)
+        public async Task<UserDtoUpdateResult> Put(UserDtoUpdate user)
         {
-            return await _repository.UpdateAsync(user);
+            var userModel = _mapper.Map<UserModel>(user);
+            var entity = _mapper.Map<User>(userModel);
+
+            var result = await _repository.UpdateAsync(entity);
+
+            return _mapper.Map<UserDtoUpdateResult>(result);
         }
     }
 }

@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Supermarket.Application.Api.Config.Swagger;
 using Supermarket.CrossCutting.DependencyInjection;
+using Supermarket.CrossCutting.Mappings;
 using Supermarket.Domain.Security;
 using System;
 
@@ -29,6 +31,16 @@ namespace Supermarket.Application.Api
             ConfigureSwagger.ConfigureDependenciesService(services);
             ConfigureService.ConfigureDependenciesService(services);
             ConfigureRepository.ConfigureDependenciesService(services);
+
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new DtoToModelProfile());
+                cfg.AddProfile(new EntityToDtoProfile());
+                cfg.AddProfile(new ModelToEntityProfile());
+            });
+
+            IMapper mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
 
             var signingConfiguration = new SigningConfiguration();
             services.AddSingleton(signingConfiguration);

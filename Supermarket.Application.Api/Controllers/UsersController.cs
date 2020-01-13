@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Supermarket.Domain.Dtos.Users;
 using Supermarket.Domain.Entities;
 using Supermarket.Domain.Interfaces.Services.Users;
 
@@ -23,7 +24,7 @@ namespace Supermarket.Application.Api.Controllers
         // GET: api/Users
         [Authorize("Bearer")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -41,7 +42,7 @@ namespace Supermarket.Application.Api.Controllers
         // GET: api/Users/5
         [Authorize("Bearer")]
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(Guid id)
+        public async Task<ActionResult<UserDto>> GetUser(Guid id)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -61,14 +62,14 @@ namespace Supermarket.Application.Api.Controllers
         // more details see https://aka.ms/RazorPagesCRUD.
         [Authorize("Bearer")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser([FromBody] User user)
+        public async Task<ActionResult<UserDtoUpdateResult>> PutUser([FromBody] UserDtoUpdate userDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                var result = await _service.Put(user);
+                var result = await _service.Put(userDto);
 
                 if (result != null)
                     return Ok(result);
@@ -86,17 +87,17 @@ namespace Supermarket.Application.Api.Controllers
         // more details see https://aka.ms/RazorPagesCRUD.
         [Authorize("Bearer")]
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser([FromBody] User user)
+        public async Task<ActionResult<UserDtoCreateResult>> PostUser([FromBody] UserDtoCreate userDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                var result = await _service.Post(user);
+                var result = await _service.Post(userDto);
 
                 if (result != null)
-                    return CreatedAtAction("GetUser", new { id = user.Id }, user);
+                    return CreatedAtAction("GetUser", new { id = result.Id }, userDto);
 
                 return BadRequest();
             }
@@ -109,7 +110,7 @@ namespace Supermarket.Application.Api.Controllers
         // DELETE: api/Users/5
         [Authorize("Bearer")]
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(Guid id)
+        public async Task<ActionResult> DeleteUser(Guid id)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
