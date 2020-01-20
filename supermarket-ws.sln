@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Supermarket.CrossCutting", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Supermarket.Data", "Supermarket.Data\Supermarket.Data.csproj", "{07BBFF2B-8171-40A1-931E-450768221774}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Supermarket.Service", "Supermarket.Servic\Supermarket.Service.csproj", "{808D701A-7DDA-4202-B408-A76A2DA4EDAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Supermarket.Service", "Supermarket.Service\Supermarket.Service.csproj", "{808D701A-7DDA-4202-B408-A76A2DA4EDAA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.Application.Api", "Supermarket.Application.Api\Supermarket.Application.Api.csproj", "{5E545C6E-BE2A-41C7-85C8-522DC2EEDA72}"
 EndProject

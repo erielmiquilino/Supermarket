@@ -12,7 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Supermarket.Data\Supermarket.Data.csproj" />
     <ProjectReference Include="..\Supermarket.Domain\Supermarket.Domain.csproj" />
-    <ProjectReference Include="..\Supermarket.Servic\Supermarket.Service.csproj" />
+    <ProjectReference Include="..\Supermarket.Service\Supermarket.Service.csproj" />
   </ItemGroup>
 
 </Project>

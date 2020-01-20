@@ -17,7 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Supermarket.CrossCuttimg\Supermarket.CrossCutting.csproj" />
     <ProjectReference Include="..\Supermarket.Domain\Supermarket.Domain.csproj" />
-    <ProjectReference Include="..\Supermarket.Servic\Supermarket.Service.csproj" />
+    <ProjectReference Include="..\Supermarket.Service\Supermarket.Service.csproj" />
   </ItemGroup>
 
 
