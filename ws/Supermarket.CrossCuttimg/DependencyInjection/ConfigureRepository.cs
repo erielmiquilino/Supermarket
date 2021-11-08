@@ -8,7 +8,7 @@ using Supermarket.Domain.Interfaces.Repositories;
 
 namespace Supermarket.CrossCutting.DependencyInjection
 {
-    public class ConfigureRepository
+    public static class ConfigureRepository
     {
         public static void ConfigureDependenciesService(IServiceCollection serviceDescriptors)
         {

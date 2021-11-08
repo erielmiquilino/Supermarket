@@ -1,13 +1,13 @@
-﻿using Supermarket.Domain.Entities.Base;
-using System;
+﻿using System;
+using Supermarket.Domain.Entities.Base;
 
-namespace Supermarket.Entities.Models
+namespace Supermarket.Domain.Entities
 {
-    public class CartItem : BaseEntity
+    public abstract class CartItem : BaseEntity
     {
         public Guid ProductId { get; set; }
 
-        public virtual Product product { get; set; }
+        public virtual Product Product { get; set; }
 
         public decimal Quantity { get; set; }
 

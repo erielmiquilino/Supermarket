@@ -1,14 +1,13 @@
 ﻿using Supermarket.Domain.Entities.Base;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Supermarket.Domain.Interfaces
 {
     public interface IRepository<T> where T : BaseEntity
     {
-        Task<T> InsertAsysnc(T item);
+        Task<T> InsertAsync(T item);
 
         Task<T> UpdateAsync(T item);
 

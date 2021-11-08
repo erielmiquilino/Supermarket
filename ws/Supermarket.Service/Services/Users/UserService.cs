@@ -12,7 +12,7 @@ namespace Supermarket.Service.Services.Users
 {
     public class UserService : IUserService
     {
-        private IRepository<User> _repository;
+        private readonly IRepository<User> _repository;
 
         private readonly IMapper _mapper;
 
@@ -46,7 +46,7 @@ namespace Supermarket.Service.Services.Users
             var userModel = _mapper.Map<UserModel>(user);
             var entity = _mapper.Map<User>(userModel);
 
-            var result = await _repository.InsertAsysnc(entity);
+            var result = await _repository.InsertAsync(entity);
 
             return _mapper.Map<UserDtoCreateResult>(result);
         }

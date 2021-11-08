@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Supermarket.Domain.Interfaces.Services.Products;
-using Supermarket.Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Supermarket.Domain.Entities;
 
 namespace Supermarket.Application.Api.Controllers
 {

@@ -6,7 +6,7 @@ using Supermarket.Service.Services.Users;
 
 namespace Supermarket.CrossCutting.DependencyInjection
 {
-    public class ConfigureService
+    public static class ConfigureService
     {
         public static void ConfigureDependenciesService(IServiceCollection serviceDescriptors)
         {

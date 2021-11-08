@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Supermarket.Domain.Dtos;
-using Supermarket.Domain.Entities;
 using Supermarket.Domain.Interfaces.Services.Users;
 using System;
 using System.Net;
@@ -13,7 +12,7 @@ namespace Supermarket.Application.Api.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private ILoginService _service;
+        private readonly ILoginService _service;
 
         public LoginController(ILoginService service)
         {
@@ -24,7 +23,7 @@ namespace Supermarket.Application.Api.Controllers
         // POST: api/Login
         [AllowAnonymous]
         [HttpPost]
-        public async Task<Object> Login([FromBody] LoginDto login)
+        public async Task<object> Login([FromBody] LoginDto login)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

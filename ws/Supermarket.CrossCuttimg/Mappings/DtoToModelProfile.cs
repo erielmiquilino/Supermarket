@@ -4,7 +4,7 @@ using Supermarket.Domain.Models;
 
 namespace Supermarket.CrossCutting.Mappings
 {
-    public class DtoToModelProfile: Profile
+    public class DtoToModelProfile : Profile
     {
         public DtoToModelProfile()
         {

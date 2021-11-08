@@ -1,11 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Supermarket.Application.Api.Config.Swagger
 {
-    public class ConfigureSwagger
+    public static class ConfigureSwagger
     {
 
         public static void ConfigureDependenciesService(IServiceCollection serviceDescriptors)
@@ -42,7 +41,7 @@ namespace Supermarket.Application.Api.Config.Swagger
                        },
                        new List<string>()
                    },
-                }); ;
+                });
            });
         }
     }

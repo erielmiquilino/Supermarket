@@ -1,12 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Supermarket.Domain.Dtos.Users;
+using Supermarket.Domain.Interfaces.Services.Users;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Supermarket.Domain.Dtos.Users;
-using Supermarket.Domain.Entities;
-using Supermarket.Domain.Interfaces.Services.Users;
 
 namespace Supermarket.Application.Api.Controllers
 {
@@ -14,7 +13,7 @@ namespace Supermarket.Application.Api.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private IUserService _service;
+        private readonly IUserService _service;
 
         public UsersController(IUserService service)
         {

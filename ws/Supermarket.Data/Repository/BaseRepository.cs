@@ -10,11 +10,11 @@ namespace Supermarket.Data.Repository
 {
     public class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
-        protected readonly MyContext _context;
+        private readonly MyContext _context;
 
-        private DbSet<T> _dataset;
+        private readonly DbSet<T> _dataset;
 
-        public BaseRepository(MyContext context)
+        protected BaseRepository(MyContext context)
         {
             _context = context;
             _dataset = _context.Set<T>();
@@ -22,21 +22,13 @@ namespace Supermarket.Data.Repository
 
         public async Task<bool> DeleteAsync(Guid id)
         {
-            try
-            {
-                var result = await _dataset.SingleOrDefaultAsync(p => p.Id.Equals(id));
+            var result = await _dataset.SingleOrDefaultAsync(p => p.Id.Equals(id));
 
-                if (result == null)
-                    return false;
+            if (result == null)
+                return false;
 
-                _dataset.Remove(result);
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
+            _dataset.Remove(result);
+            await _context.SaveChangesAsync();
             return true;
         }
 
@@ -45,69 +37,40 @@ namespace Supermarket.Data.Repository
             return await _dataset.AnyAsync(p => p.Id.Equals(id));
         }
 
-        public async Task<T> InsertAsysnc(T item)
+        public async Task<T> InsertAsync(T item)
         {
-            try
-            {
-                if (item.Id == Guid.Empty)
-                    item.Id = Guid.NewGuid();
+            if (item.Id == Guid.Empty)
+                item.Id = Guid.NewGuid();
 
-                item.InsertDate = DateTime.UtcNow;
-                _dataset.Add(item);
+            item.InsertDate = DateTime.UtcNow;
+            _dataset.Add(item);
 
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            { 
-                throw ex;
-            }
+            await _context.SaveChangesAsync();
 
             return item;
         }
 
         public async Task<T> SelectAsync(Guid id)
         {
-            try
-            {
-                return await _dataset.SingleOrDefaultAsync(p => p.Id.Equals(id));
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return await _dataset.SingleOrDefaultAsync(p => p.Id.Equals(id));
         }
 
         public async Task<IEnumerable<T>> SelectAsync()
         {
-            try
-            {
-                return await _dataset.ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return await _dataset.ToListAsync();
         }
 
         public async Task<T> UpdateAsync(T item)
         {
-            try
-            {
-                var result = await _dataset.SingleOrDefaultAsync(p => p.Id.Equals(item.Id));
+            var result = await _dataset.SingleOrDefaultAsync(p => p.Id.Equals(item.Id));
 
-                if (result == null)
-                    return null;
+            if (result == null)
+                return null;
 
-                item.InsertDate = result.InsertDate;
+            item.InsertDate = result.InsertDate;
 
-                //atualiza os valores
-                _context.Entry(result).CurrentValues.SetValues(item);
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            _context.Entry(result).CurrentValues.SetValues(item);
+            await _context.SaveChangesAsync();
 
             return item;
         }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Supermarket.Domain.Dtos.Users
 {
@@ -8,10 +6,10 @@ namespace Supermarket.Domain.Dtos.Users
     {
         public Guid Id { get; set; }
 
-        public String Name { get; set; }
+        public string Name { get; set; }
 
-        public String Email { get; set; }
+        public string Email { get; set; }
 
-        public String Password { get; set; }
+        public string Password { get; set; }
     }
 }

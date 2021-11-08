@@ -1,5 +1,4 @@
 ﻿using Supermarket.Domain.Dtos.Users;
-using Supermarket.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

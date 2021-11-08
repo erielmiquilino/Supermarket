@@ -1,13 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Supermarket.Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Supermarket.Domain.Entities;
 
 namespace Supermarket.Data.MappingConfiguration
 {
-    class ProductConfiguration : IEntityTypeConfiguration<Product>
+    internal class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {

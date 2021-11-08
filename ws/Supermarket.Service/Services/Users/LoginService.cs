@@ -1,7 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using Supermarket.Domain.Dtos;
-using Supermarket.Domain.Entities;
 using Supermarket.Domain.Interfaces.Repositories;
 using Supermarket.Domain.Interfaces.Services.Users;
 using Supermarket.Domain.Security;
@@ -15,50 +13,43 @@ namespace Supermarket.Service.Services.Users
 {
     public class LoginService : ILoginService
     {
-        private IUserRepository _userRepository;
-        private SigningConfiguration _signingConfiguration;
-        private TokenConfiguration _tokenConfiguration;
-        private IConfiguration _configuration;
+        private readonly IUserRepository _userRepository;
+        private readonly SigningConfiguration _signingConfiguration;
+        private readonly TokenConfiguration _tokenConfiguration;
 
         public LoginService(IUserRepository userRepository,
-                            IConfiguration configuration,
                             SigningConfiguration signingConfiguration,
                             TokenConfiguration tokenConfiguration)
         {
             _userRepository = userRepository;
-            _configuration = configuration;
             _signingConfiguration = signingConfiguration;
             _tokenConfiguration = tokenConfiguration;
         }
 
         public async Task<object> FindByLogin(LoginDto login)
         {
-            if (login != null && !string.IsNullOrEmpty(login.Email))
-            {
-                var registredUser = await _userRepository.FindByLogin(login.Email);
-                if (registredUser == null)
-                    return Unauthenticated();
-                else
-                {
-                    var identity = new ClaimsIdentity(
-                        new GenericIdentity(login.Email),
-                        new[]
-                        {
-                            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                            new Claim(JwtRegisteredClaimNames.UniqueName, login.Email)
-                        }
-                    );
-
-                    var createDate = DateTime.Now;
-                    var expirationDate = createDate + TimeSpan.FromSeconds(_tokenConfiguration.Seconds);
-                    var tokenHandler = new JwtSecurityTokenHandler();
-                    var token = CreateToken(identity, createDate, expirationDate, tokenHandler);
-
-                    return SucessObject(login, createDate, expirationDate, token);
-                }
-            }
-            else
+            if (login == null || string.IsNullOrEmpty(login.Email)) 
                 return Unauthenticated();
+
+            var registeredUser = await _userRepository.FindByLogin(login.Email);
+            if (registeredUser == null)
+                return Unauthenticated();
+
+            var identity = new ClaimsIdentity(
+                new GenericIdentity(login.Email),
+                new[]
+                {
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(JwtRegisteredClaimNames.UniqueName, login.Email)
+                }
+            );
+
+            var createDate = DateTime.Now;
+            var expirationDate = createDate + TimeSpan.FromSeconds(_tokenConfiguration.Seconds);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var token = CreateToken(identity, createDate, expirationDate, tokenHandler);
+
+            return SuccessObject(login, createDate, expirationDate, token);
         }
 
         private static object Unauthenticated()
@@ -70,7 +61,7 @@ namespace Supermarket.Service.Services.Users
             };
         }
 
-        private static object SucessObject(LoginDto login, DateTime createDate, DateTime expirationDate, string token)
+        private static object SuccessObject(LoginDto login, DateTime createDate, DateTime expirationDate, string token)
         {
             return new
             {
@@ -79,7 +70,7 @@ namespace Supermarket.Service.Services.Users
                 expiration = expirationDate.ToString("yyyy-MM-dd HH:mm:ss"),
                 acessToken = token,
                 userName = login.Email,
-                message = "Usuário Logado com sucesso"
+                message = "Usuário autenticado com sucesso"
             };
         }
 

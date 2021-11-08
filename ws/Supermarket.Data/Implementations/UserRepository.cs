@@ -9,7 +9,7 @@ namespace Supermarket.Data.Implementations
 {
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        private DbSet<User> _database;
+        private readonly DbSet<User> _database;
 
         public UserRepository(MyContext context) : base(context)
         {

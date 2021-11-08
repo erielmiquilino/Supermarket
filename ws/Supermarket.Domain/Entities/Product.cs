@@ -1,10 +1,9 @@
 ﻿using Supermarket.Domain.Entities.Base;
-using System;
 
-namespace Supermarket.Entities.Models
+namespace Supermarket.Domain.Entities
 {
     public class Product : BaseEntity
     {
-        public String Description { get; set; }
+        public string Description { get; set; }
     }
 }

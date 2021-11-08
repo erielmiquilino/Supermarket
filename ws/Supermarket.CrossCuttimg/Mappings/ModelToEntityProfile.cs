@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using Supermarket.Domain.Entities;
 using Supermarket.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Supermarket.CrossCutting.Mappings
 {

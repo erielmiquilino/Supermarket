@@ -1,6 +1,6 @@
-﻿using Supermarket.Domain.Interfaces;
+﻿using Supermarket.Domain.Entities;
+using Supermarket.Domain.Interfaces;
 using Supermarket.Domain.Interfaces.Services.Products;
-using Supermarket.Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,7 +9,7 @@ namespace Supermarket.Service.Services.Products
 {
     public class ProductService : IProductService
     {
-        private IRepository<Product> _repository;
+        private readonly IRepository<Product> _repository;
 
         public ProductService(IRepository<Product> repository)
         {
@@ -33,7 +33,7 @@ namespace Supermarket.Service.Services.Products
 
         public async Task<Product> Post(Product product)
         {
-            return await _repository.InsertAsysnc(product);
+            return await _repository.InsertAsync(product);
         }
 
         public async Task<Product> Put(Product product)

@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Supermarket.Data.MappingConfiguration;
 using Supermarket.Domain.Entities;
-using Supermarket.Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Supermarket.Data.Context
 {

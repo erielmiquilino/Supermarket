@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Supermarket.Domain.Security
+﻿namespace Supermarket.Domain.Security
 {
     public class TokenConfiguration
     {
