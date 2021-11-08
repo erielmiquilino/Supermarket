@@ -9,7 +9,7 @@ namespace Supermarket.Data.Context
         {
             const string connectionString = "Server=localhost;Port=3306;Database=supermarket;Uid=root;Pwd=P@ssw0rd";
             var optionBuilder = new DbContextOptionsBuilder<MyContext>();
-            optionBuilder.UseMySql(connectionString);
+            optionBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
             return new MyContext(optionBuilder.Options);
         }
     }

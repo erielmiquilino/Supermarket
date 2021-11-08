@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Supermarket.Domain.Dtos.Products;
 using Supermarket.Domain.Entities;
 
 namespace Supermarket.Application.Api.Controllers
@@ -13,7 +14,8 @@ namespace Supermarket.Application.Api.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private IProductService _service;
+        private readonly IProductService _service;
+
         public ProductsController(IProductService service)
         {
             _service = service;
@@ -85,7 +87,7 @@ namespace Supermarket.Application.Api.Controllers
         // more details see https://aka.ms/RazorPagesCRUD.
         [Authorize("Bearer")]
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct([FromBody] Product product)
+        public async Task<ActionResult<Product>> PostProduct([FromBody] ProductDtoCreate product)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -95,7 +97,7 @@ namespace Supermarket.Application.Api.Controllers
                 var result = await _service.Post(product);
 
                 if (result !=  null)
-                    return CreatedAtAction("GetProduct", new { id = product.Id }, product);
+                    return CreatedAtAction("GetProduct", new { id = result.Id }, product);
 
                 return BadRequest();
             }

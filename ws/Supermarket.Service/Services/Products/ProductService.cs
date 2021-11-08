@@ -1,4 +1,6 @@
-﻿using Supermarket.Domain.Entities;
+﻿using AutoMapper;
+using Supermarket.Domain.Dtos.Products;
+using Supermarket.Domain.Entities;
 using Supermarket.Domain.Interfaces;
 using Supermarket.Domain.Interfaces.Services.Products;
 using System;
@@ -10,10 +12,12 @@ namespace Supermarket.Service.Services.Products
     public class ProductService : IProductService
     {
         private readonly IRepository<Product> _repository;
+        private readonly IMapper _mapper;
 
-        public ProductService(IRepository<Product> repository)
+        public ProductService(IRepository<Product> repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         public async Task<bool> Delete(Guid id)
@@ -31,9 +35,11 @@ namespace Supermarket.Service.Services.Products
             return await _repository.SelectAsync();
         }
 
-        public async Task<Product> Post(Product product)
+        public async Task<Product> Post(ProductDtoCreate product)
         {
-            return await _repository.InsertAsync(product);
+            var entity = _mapper.Map<Product>(product);
+
+            return await _repository.InsertAsync(entity);
         }
 
         public async Task<Product> Put(Product product)

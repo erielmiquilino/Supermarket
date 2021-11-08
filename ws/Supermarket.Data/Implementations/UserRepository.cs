@@ -4,6 +4,7 @@ using Supermarket.Data.Repository;
 using Supermarket.Domain.Entities;
 using Supermarket.Domain.Interfaces.Repositories;
 using System.Threading.Tasks;
+using Supermarket.Domain.Dtos;
 
 namespace Supermarket.Data.Implementations
 {
@@ -16,9 +17,10 @@ namespace Supermarket.Data.Implementations
             _database = context.Set<User>();
         }
 
-        public async Task<User> FindByLogin(string email)
+        public async Task<User> FindByLogin(LoginDto loginDto)
         {
-            return await _database.FirstOrDefaultAsync(user => user.Email.Equals(email));
+            return await _database
+                .FirstOrDefaultAsync(user => user.Email.Equals(loginDto.Email) && user.Password.Equals(loginDto.Password));
         }
     }
 }

@@ -28,10 +28,7 @@ namespace Supermarket.Service.Services.Users
 
         public async Task<object> FindByLogin(LoginDto login)
         {
-            if (login == null || string.IsNullOrEmpty(login.Email)) 
-                return Unauthenticated();
-
-            var registeredUser = await _userRepository.FindByLogin(login.Email);
+            var registeredUser = await _userRepository.FindByLogin(login);
             if (registeredUser == null)
                 return Unauthenticated();
 

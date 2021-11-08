@@ -15,6 +15,8 @@ namespace Supermarket.Data.Context
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Product>(new ProductConfiguration().Configure);
             modelBuilder.Entity<User>(new UserConfiguration().Configure);
+            modelBuilder.Entity<Cart>(new CartConfiguration().Configure);
+            modelBuilder.Entity<CartItem>(new CartItemConfiguration().Configure);
         }
     }
 }

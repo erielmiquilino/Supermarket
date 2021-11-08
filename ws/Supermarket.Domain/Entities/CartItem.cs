@@ -3,7 +3,7 @@ using Supermarket.Domain.Entities.Base;
 
 namespace Supermarket.Domain.Entities
 {
-    public abstract class CartItem : BaseEntity
+    public class CartItem : BaseEntity
     {
         public Guid ProductId { get; set; }
 

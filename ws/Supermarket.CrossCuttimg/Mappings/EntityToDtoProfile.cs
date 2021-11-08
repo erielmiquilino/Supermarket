@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Supermarket.Domain.Dtos.Carts;
+using Supermarket.Domain.Dtos.Products;
 using Supermarket.Domain.Dtos.Users;
 using Supermarket.Domain.Entities;
 
@@ -15,6 +17,12 @@ namespace Supermarket.CrossCutting.Mappings
                 .ReverseMap();
 
             CreateMap<UserDtoUpdateResult, User>()
+                .ReverseMap();
+
+            CreateMap<ProductDtoCreate, Product>()
+                .ReverseMap();
+
+            CreateMap<CartDtoCreate, Cart>()
                 .ReverseMap();
         }
     }

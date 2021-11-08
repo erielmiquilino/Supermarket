@@ -13,6 +13,7 @@ using Supermarket.CrossCutting.DependencyInjection;
 using Supermarket.CrossCutting.Mappings;
 using Supermarket.Domain.Security;
 using System;
+using Supermarket.Application.Api.Extensions;
 
 namespace Supermarket.Application.Api
 {
@@ -107,6 +108,8 @@ namespace Supermarket.Application.Api
             {
                 endpoints.MapControllers();
             });
+
+            app.ApplyMigrations();
         }
     }
 }

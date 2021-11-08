@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Supermarket.Domain.Dtos.Products;
 
 namespace Supermarket.Domain.Interfaces.Services.Products
 {
@@ -11,7 +12,7 @@ namespace Supermarket.Domain.Interfaces.Services.Products
 
         Task<IEnumerable<Product>> GetAll();
 
-        Task<Product> Post(Product product);
+        Task<Product> Post(ProductDtoCreate product);
 
         Task<Product> Put(Product product);
 
