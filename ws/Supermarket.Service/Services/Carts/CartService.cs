@@ -1,10 +1,9 @@
-﻿using Supermarket.Domain.Dtos.Carts;
+﻿using AutoMapper;
+using Supermarket.Domain.Dtos.Carts;
 using Supermarket.Domain.Entities;
-using Supermarket.Domain.Interfaces.Services.Carts;
-using System;
-using System.Threading.Tasks;
-using AutoMapper;
 using Supermarket.Domain.Interfaces;
+using Supermarket.Domain.Interfaces.Services.Carts;
+using System.Threading.Tasks;
 
 namespace Supermarket.Service.Services.Carts
 {

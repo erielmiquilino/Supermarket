@@ -1,5 +1,4 @@
-﻿using System.Xml;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Supermarket.Domain.Entities;
 

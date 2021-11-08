@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Threading.Tasks;
-using Supermarket.Domain.Dtos.Carts;
+﻿using Supermarket.Domain.Dtos.Carts;
 using Supermarket.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace Supermarket.Domain.Interfaces.Services.Carts
 {
