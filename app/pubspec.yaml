@@ -23,7 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http:
+  http: 0.13.3
   http_interceptor:
   intl:
 
